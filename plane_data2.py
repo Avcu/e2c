@@ -150,7 +150,7 @@ class PlaneData(DataSet):
 
 if __name__ == "__main__":
   import matplotlib.animation as animation
-  p=PlaneData("plane2.npz","env1.png")
+  p=PlaneData("data\plane2.npz","env_data\env1.png")
   p.initialize()
   p.save()
   im=p.im
@@ -173,9 +173,10 @@ if __name__ == "__main__":
 
     anim=animation.FuncAnimation(fig, updatemat2, frames=100, interval=1000, blit=True, repeat=True)
 
-    Writer = animation.writers['imagemagick'] # animation.writers.avail
-    writer = Writer(fps=1, metadata=dict(artist='Me'), bitrate=1800)
-    anim.save('sample_obs.gif', writer=writer)
+    # Writer = animation.writers['imagemagick'] # animation.writers.avail
+    # writer = Writer(fps=1, metadata=dict(artist='Me'), bitrate=1800)
+    anim.save('data/sample_obs.gif', dpi=80, writer='pillow')
+    plt.show()
 
   #show trajectory
   if True:
@@ -186,4 +187,5 @@ if __name__ == "__main__":
       mat.set_data(X[t,:].reshape((A,B)))
       return mat,
     anim = animation.FuncAnimation(fig, updatemat, frames=T-1, interval=30, blit=True, repeat=True)
+    anim.save('data/trajectory.gif', dpi=80, writer='pillow')
     plt.show()
